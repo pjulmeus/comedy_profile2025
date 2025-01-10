@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51QbRpTCHSonHOQuJOqQMMuD9j2AcDsNQJ8fxNHFyY3mw8Zi7YssWejBk4RXmmmFH7389SsYhlQsKDKiKt8de2XKN00CoRGPzaC');
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 const express = require('express')
 require('dotenv').config()
 
@@ -6,7 +6,7 @@ const app = express()
 app.use(express.static('public'));
 const PORT = process.env.DB_PORT
 
-const YOUR_DOMAIN = `http://localhost:${PORT}`;
+const YOUR_DOMAIN = `comedy-profile2025.vercel.app`;
 
     app.get('/', async(req,res) => {
         console.log("Hello, here I home")
