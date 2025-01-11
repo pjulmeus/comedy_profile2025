@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+// Ensure Stripe secret key is set
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('Stripe secret key is not defined. Set STRIPE_SECRET_KEY in your environment variables.');
+}
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-12-18.acacia',
+  apiVersion: '2023-10-16', // Use the latest stable API version
 });
 
 export async function POST(request: Request) {
@@ -27,15 +32,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });
   } catch (error: any) {
     console.error('Error creating payment intent:', error);
-
+    
     return NextResponse.json(
       { error: 'Error creating payment intent', details: error.message },
       { status: 500 }
     );
   }
-}
-
-// Ensure Stripe secret key is set
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Stripe secret key is not defined. Set STRIPE_SECRET_KEY in your environment variables.');
 }
