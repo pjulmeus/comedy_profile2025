@@ -17,7 +17,6 @@ export function CartSheet() {
     // Calculate totals
     const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const shipping = itemCount > 0 ? 5.99 : 0;
-   console.log("Subtotal is " + subtotal)
 
   const handleCheckout = () => {
     router.push('/checkout');
